@@ -4,9 +4,12 @@
 #include <string.h>
 
 int registro(){
+
+    int opcao = 0;
+
 	setlocale(LC_ALL, "Portuguese");
 
-    printf("VocÃª escolheu registro de nomes! \n");
+    printf("Você escolheu registro de nomes! \n");
 
     char arquivo[40] = "arquivo";
     char cpf[40] = "000.000.000";
@@ -71,15 +74,28 @@ int registro(){
     fprintf(file, ".");
     fclose(file);
 
-    printf("UsuÃ¡rio cadastrado com sucesso! \n");
+    printf("Usuário cadastrado com sucesso! \n");
+    printf("Para voltar ao Menu digite (1) para cadastrar outro usuário digite (2) \n");
+    scanf("%d", &opcao);
 
-	return 0;
+    if(opcao == 1)
+        {
+        main();
+        }
+    if(opcao == 2)
+        {
+        registro();
+        }
+    return 0;
 }
 
 int consulta(){
+
+    int opcao = 0;
+
 	setlocale(LC_ALL, "Portuguese");
 
-    printf("VocÃª escolheu consultar os nomes! \n");
+    printf("Você escolheu consultar os nomes! \n");
 
     char cpf[40];
     char conteudo[200];
@@ -91,22 +107,49 @@ int consulta(){
     file = fopen(cpf, "r");
 
     if(file == NULL){
-        printf("Este CPF nÃ£o foi localizado! \n");
+        printf("Este CPF não foi localizado! \n");
+        printf("Para voltar ao Menu digite (1) para consultar outro usuário digite (2) \n");
+        scanf("%d", &opcao);
+
+        if(opcao == 1)
+            {
+            main();
+            }
+        if(opcao == 2)
+            {
+            consulta();
+            }
     }
 
     while(fgets(conteudo, 200, file) != NULL){
-        printf("\n Essas sÃ£o as informaÃ§Ãµes do usuÃ¡rio: \n");
+        printf("\n Essas são as informações do usuário: \n");
         printf("%s", conteudo);
         printf("\n\n");
     }
     fclose(file);
+
+    printf("Para voltar ao Menu digite (1) para consultar outro usuário digite (2) \n");
+    scanf("%d", &opcao);
+
+    if(opcao == 1)
+        {
+        main();
+        }
+    if(opcao == 2)
+        {
+        consulta();
+        }
+
 	return 0;
 }
 
 int deleta(){
+
+    int opcao = 0;
+
 	setlocale(LC_ALL, "Portuguese");
 
-    printf("VocÃª escolheu deletar nomes! \n");
+    printf("Você escolheu deletar nomes! \n");
 
     char cpf[40];
 
@@ -114,14 +157,39 @@ int deleta(){
     scanf("%s", cpf);
 
     remove(cpf);
-    printf("UsuÃ¡rio removido do sistema! \n");
+    printf("Usuário removido do sistema! \n");
+    printf("Esse CPF não foi encontrado! \n");
+    printf("Para voltar ao Menu digite (1) para deletar outro usuário digite (2) \n");
+    scanf("%d", &opcao);
+
+    if(opcao == 1)
+        {
+        main();
+        }
+    if(opcao == 2)
+        {
+        deleta();
+        }
+
+    return 0;
 
     FILE *file;
     file = fopen(cpf, "r");
 
     if(file == NULL)
     {
-        printf("Esse CPF nÃ£o foi encontrado! \n");
+        printf("Esse CPF não foi encontrado! \n");
+        printf("Para voltar ao Menu digite (1) para deletar outro usuário digite (2) \n");
+        scanf("%d", &opcao);
+
+        if(opcao == 1)
+            {
+            main();
+            }
+        if(opcao == 2)
+            {
+            deleta();
+            }
 
     }
     fclose(file);
@@ -140,8 +208,8 @@ int main()
 
         setlocale(LC_ALL, "Portuguese");
 
-        printf("\t #### CARTÃ“RIO EBAC ####\n");
-        printf("\t Digite para selecionar sua opÃ§Ã£o: \n");
+        printf("\t #### CARTÓRIO EBAC ####\n");
+        printf("\t Digite para selecionar sua opção: \n");
         printf("\t 1 - Registrar Nomes: \n");
         printf("\t 2 - Consultar Nomes: \n");
         printf("\t 3 - Deletar Nomes: \n");
@@ -164,9 +232,12 @@ int main()
             return 0;
             break;
         default:
-            printf("OpÃ§Ã£o InvÃ¡lida! \n");
+            printf("Opção Inválida! \n");
             break;
 
         }
 	}
+
+	return 0;
+
 }
